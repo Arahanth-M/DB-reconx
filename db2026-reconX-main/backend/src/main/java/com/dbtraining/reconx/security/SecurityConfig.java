@@ -74,8 +74,8 @@ public class SecurityConfig {
                 .build();
     }
 
-    // TODO(TICKET-ADV073): @Bean PasswordEncoder (BCrypt).
-    // TODO(TICKET-ADV073): register JwtAuthenticationFilter before
-    //                     UsernamePasswordAuthenticationFilter.
-    // TODO(TICKET-ADV074): add @EnableMethodSecurity and the RBAC matchers.
+    @Bean
+    public org.springframework.security.crypto.password.PasswordEncoder passwordEncoder() {
+        return new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder();
+    }
 }

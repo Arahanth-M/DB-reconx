@@ -1,6 +1,5 @@
 com/dbtraining/reconx/dto/ReconResult.class
 com/dbtraining/reconx/security/JwtAuthenticationFilter.class
-com/dbtraining/reconx/model/TradeFactory$1.class
 com/dbtraining/reconx/exception/InvalidTradeException.class
 com/dbtraining/reconx/service/ReconciliationEngine.class
 com/dbtraining/reconx/model/BondTrade.class
@@ -20,7 +19,6 @@ com/dbtraining/reconx/exception/TradeNotFoundException.class
 com/dbtraining/reconx/model/EquityTrade$Builder.class
 com/dbtraining/reconx/repository/TradeRepository.class
 com/dbtraining/reconx/kafka/ReconciliationConsumer.class
-com/dbtraining/reconx/dto/TradeMapperImpl.class
 com/dbtraining/reconx/dto/TradeEvent$EventType.class
 com/dbtraining/reconx/model/FXTrade.class
 com/dbtraining/reconx/observability/TradeMetrics.class

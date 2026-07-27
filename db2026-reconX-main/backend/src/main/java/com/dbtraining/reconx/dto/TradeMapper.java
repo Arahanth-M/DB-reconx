@@ -1,26 +1,34 @@
 package com.dbtraining.reconx.dto;
 
 import com.dbtraining.reconx.repository.entity.Trade;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.springframework.stereotype.Component;
 
-/**
- * ============================================================================
- * TICKET-ADV054 — MapStruct mapper: Trade entity <-> DTO
- *
- * WHAT:    Generates the entity↔DTO conversion at compile time.
- * HOW:     componentModel="spring" → MapStruct emits a @Component bean named
- *          tradeMapper that you can @Autowire.
- * WHY:     Hand-written mappers drift. MapStruct fails the build if a new
- *          field is added to one side and forgotten on the other.
- * ============================================================================
- */
-@Mapper(componentModel = "spring")
-public interface TradeMapper {
+@Component
+public class TradeMapper {
 
-    @Mapping(source = "instrument.id", target = "instrumentId")
-    @Mapping(source = "instrument.symbol", target = "instrumentSymbol")
-    @Mapping(source = "counterparty.id", target = "counterpartyId")
-    @Mapping(source = "counterparty.name", target = "counterpartyName")
-    TradeResponse toResponse(Trade trade);
+    public TradeResponse toResponse(Trade trade) {
+        if (trade == null) return null;
+        
+        Long instrumentId = trade.getInstrument() != null ? trade.getInstrument().getId() : null;
+        String instrumentSymbol = trade.getInstrument() != null ? trade.getInstrument().getSymbol() : null;
+        Long counterpartyId = trade.getCounterparty() != null ? trade.getCounterparty().getId() : null;
+        String counterpartyName = trade.getCounterparty() != null ? trade.getCounterparty().getName() : null;
+        
+        return new TradeResponse(
+            trade.getId(),
+            trade.getTradeRef(),
+            instrumentId,
+            instrumentSymbol,
+            counterpartyId,
+            counterpartyName,
+            trade.getAssetClass(),
+            trade.getSide(),
+            trade.getQuantity(),
+            trade.getPrice(),
+            trade.getTradeDate(),
+            trade.getStatus(),
+            trade.getCreatedAt(),
+            trade.getModifiedAt()
+        );
+    }
 }
