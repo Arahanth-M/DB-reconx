@@ -1,3 +1,6 @@
+/Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/test/java/com/dbtraining/reconx/controller/TradeControllerWebMvcTest.java
+/Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/test/java/com/dbtraining/reconx/integration/LiquibaseMigrationsIT.java
+/Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/test/java/com/dbtraining/reconx/integration/TradeLifecycleIT.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/test/java/com/dbtraining/reconx/model/EquityTradeTest.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/test/java/com/dbtraining/reconx/model/ReconciliationRuleTest.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/test/java/com/dbtraining/reconx/service/ReconciliationEngineTest.java

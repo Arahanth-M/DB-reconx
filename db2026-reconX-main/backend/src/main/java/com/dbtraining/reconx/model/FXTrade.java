@@ -48,7 +48,7 @@ public final class FXTrade implements TradeType {
     @Override public AssetClass assetClass() { return AssetClass.FX; }
 
     /** Notional in ccy2 = notionalCcy1 * fxRate. */
-     @Override public Money notional() {
+    @Override public Money notional() {
         return new Money(notionalCcy1.multiply(fxRate), ccy2);
     }
 
@@ -59,7 +59,7 @@ public final class FXTrade implements TradeType {
     public Side side()               { return side; }
     public long counterpartyId()     { return counterpartyId; }
 
-     @Override public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
         return (o instanceof FXTrade other) && tradeRef.equals(other.tradeRef);
     }
     @Override public int hashCode() {
@@ -71,7 +71,6 @@ public final class FXTrade implements TradeType {
                 .formatted(tradeRef, ccy1.getCurrencyCode(), ccy2.getCurrencyCode(),
                         notionalCcy1, ccy1.getCurrencyCode(), fxRate, side);
     }
-
 
     public static final class Builder {
         private TradeRef tradeRef;
@@ -91,7 +90,7 @@ public final class FXTrade implements TradeType {
         public Builder counterpartyId(long v)      { this.counterpartyId = v; return this; }
 
         public FXTrade build() {
-          Objects.requireNonNull(tradeRef,     "tradeRef");
+            Objects.requireNonNull(tradeRef,     "tradeRef");
             Objects.requireNonNull(ccy1,         "ccy1");
             Objects.requireNonNull(ccy2,         "ccy2");
             Objects.requireNonNull(notionalCcy1, "notionalCcy1");
@@ -100,7 +99,7 @@ public final class FXTrade implements TradeType {
             Objects.requireNonNull(tradeDate,    "tradeDate");
             if (ccy1.equals(ccy2)) throw new IllegalStateException("ccy1 and ccy2 must differ");
             if (fxRate.signum() <= 0) throw new IllegalStateException("fxRate must be > 0");
-            return new FXTrade(this);      
-          }
+            return new FXTrade(this);
+        }
     }
 }

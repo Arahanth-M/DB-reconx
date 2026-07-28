@@ -1,5 +1,6 @@
 com/dbtraining/reconx/dto/ReconResult.class
 com/dbtraining/reconx/security/JwtAuthenticationFilter.class
+com/dbtraining/reconx/model/TradeFactory$1.class
 com/dbtraining/reconx/exception/InvalidTradeException.class
 com/dbtraining/reconx/service/ReconciliationEngine.class
 com/dbtraining/reconx/model/BondTrade.class
@@ -11,6 +12,7 @@ com/dbtraining/reconx/exception/DuplicateTradeRefException.class
 com/dbtraining/reconx/model/EquityTrade.class
 com/dbtraining/reconx/dto/ReconResult$Status.class
 com/dbtraining/reconx/repository/TradeSpecifications.class
+com/dbtraining/reconx/observability/MdcFilter.class
 com/dbtraining/reconx/controller/AuditController.class
 com/dbtraining/reconx/kafka/KafkaTopicsConfig.class
 com/dbtraining/reconx/repository/InstrumentRepository.class
@@ -32,6 +34,7 @@ com/dbtraining/reconx/repository/AppUserRepository.class
 com/dbtraining/reconx/dto/LoginResponse.class
 com/dbtraining/reconx/repository/entity/AppUser.class
 com/dbtraining/reconx/repository/entity/ReconBreak.class
+com/dbtraining/reconx/observability/KafkaHealthIndicator.class
 com/dbtraining/reconx/model/DerivativeTrade.class
 com/dbtraining/reconx/model/TradeFactory.class
 com/dbtraining/reconx/model/DerivativeTrade$Builder.class
@@ -51,6 +54,7 @@ com/dbtraining/reconx/kafka/TradeEventProducer.class
 com/dbtraining/reconx/security/JwtTokenProvider.class
 com/dbtraining/reconx/model/TradeType.class
 com/dbtraining/reconx/dto/TradeRequest.class
+com/dbtraining/reconx/config/JpaConfig.class
 com/dbtraining/reconx/exception/ReconciliationMismatchException.class
 com/dbtraining/reconx/repository/entity/Instrument.class
 com/dbtraining/reconx/ReconxApplication.class
@@ -64,5 +68,6 @@ com/dbtraining/reconx/model/ReconciliationRule.class
 com/dbtraining/reconx/repository/AuditLogRepository.class
 com/dbtraining/reconx/model/FXTrade$Builder.class
 com/dbtraining/reconx/service/TradeService.class
+com/dbtraining/reconx/controller/DeprecatedTradeController.class
 com/dbtraining/reconx/model/TradeRef.class
 com/dbtraining/reconx/dto/TradeResponse.class

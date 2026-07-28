@@ -19,7 +19,7 @@ class ReconciliationRuleTest {
             "QTY_TOLERANCE_5UNITS, 100.00, 100.00, 10, 16, false",
             "LOOSE,                100.00, 104.00, 10, 18, true"
     })
-     void matches(ReconciliationRule rule, BigDecimal pa, BigDecimal pb,
+    void matches(ReconciliationRule rule, BigDecimal pa, BigDecimal pb,
                  BigDecimal qa, BigDecimal qb, boolean expected) {
         assertThat(rule.matches(pa, qa, pb, qb)).isEqualTo(expected);
     }

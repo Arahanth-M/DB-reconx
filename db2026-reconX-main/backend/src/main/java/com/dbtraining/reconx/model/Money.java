@@ -40,17 +40,15 @@ public record Money(BigDecimal amount, Currency currency) {
     }
 
     /** Add another Money of the same currency. Throws on currency mismatch. */
-   public Money plus(Money other) {
-    Objects.requireNonNull(other, "other");
-
-    if (!currency.equals(other.currency())) {
-        throw new IllegalArgumentException("Currency mismatch");
+    public Money plus(Money other) {
+        if (!this.currency.equals(other.currency)) {
+            throw new IllegalArgumentException(
+                    "Cannot add %s to %s — currency mismatch".formatted(other.currency, this.currency));
+        }
+        return new Money(this.amount.add(other.amount), this.currency);
     }
 
-    return new Money(amount.add(other.amount()), currency);
-}
-
-public Money times(BigDecimal multiplier) {
-    return new Money(amount.multiply(multiplier), currency);
-}
+    public Money times(BigDecimal multiplier) {
+        return new Money(this.amount.multiply(multiplier), this.currency);
+    }
 }

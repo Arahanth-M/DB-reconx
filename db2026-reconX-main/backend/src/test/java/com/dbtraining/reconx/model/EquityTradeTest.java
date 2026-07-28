@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class EquityTradeTest {
 
     @Test
-   void builder_buildsWhenAllRequiredPresent() {
+    void builder_buildsWhenAllRequiredPresent() {
         EquityTrade t = sampleEquity("EQU-20260603-0001");
         assertThat(t.tradeRef().value()).isEqualTo("EQU-20260603-0001");
         assertThat(t.notional().amount()).isEqualByComparingTo(new BigDecimal("10000"));

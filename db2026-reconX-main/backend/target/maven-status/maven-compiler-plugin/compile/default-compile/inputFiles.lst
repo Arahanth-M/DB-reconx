@@ -1,7 +1,9 @@
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/ReconxApplication.java
+/Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/config/JpaConfig.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/config/OpenApiConfig.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/controller/AuditController.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/controller/AuthController.java
+/Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/controller/DeprecatedTradeController.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/controller/ReconController.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/controller/TradeController.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/dto/LoginRequest.java
@@ -36,6 +38,8 @@
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/model/TradeRef.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/model/TradeType.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/observability/DatabaseHealthIndicator.java
+/Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/observability/KafkaHealthIndicator.java
+/Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/observability/MdcFilter.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/observability/TradeMetrics.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/repository/AppUserRepository.java
 /Users/rahul/Desktop/db-reconX/db2026-reconX-main/backend/src/main/java/com/dbtraining/reconx/repository/AuditLogRepository.java

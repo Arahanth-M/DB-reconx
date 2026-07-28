@@ -46,10 +46,9 @@ public final class BondTrade implements TradeType {
     @Override public AssetClass assetClass() { return AssetClass.BOND; }
 
     /** Notional = faceValue in the bond's currency. */
-      @Override public Money notional() {
+    @Override public Money notional() {
         return new Money(faceValue, currency);
     }
-
 
     public String isin()              { return isin; }
     public BigDecimal faceValue()     { return faceValue; }
@@ -59,7 +58,7 @@ public final class BondTrade implements TradeType {
     public Side side()                { return side; }
     public long counterpartyId()      { return counterpartyId; }
 
-   @Override public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
         return (o instanceof BondTrade other) && tradeRef.equals(other.tradeRef);
     }
     @Override public int hashCode() {
@@ -91,7 +90,7 @@ public final class BondTrade implements TradeType {
         public Builder tradeDate(LocalDate v)      { this.tradeDate = v; return this; }
         public Builder counterpartyId(long v)      { this.counterpartyId = v; return this; }
 
-       public BondTrade build() {
+        public BondTrade build() {
             Objects.requireNonNull(tradeRef,     "tradeRef");
             Objects.requireNonNull(isin,         "isin");
             Objects.requireNonNull(faceValue,    "faceValue");

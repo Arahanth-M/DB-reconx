@@ -96,7 +96,7 @@ public final class DerivativeTrade implements TradeType {
         public Builder tradeDate(LocalDate v)      { this.tradeDate = v; return this; }
         public Builder counterpartyId(long v)      { this.counterpartyId = v; return this; }
 
-         public DerivativeTrade build() {
+        public DerivativeTrade build() {
             Objects.requireNonNull(tradeRef,   "tradeRef");
             Objects.requireNonNull(underlying, "underlying");
             Objects.requireNonNull(strike,     "strike");

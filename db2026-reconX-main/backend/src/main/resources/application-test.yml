@@ -1,0 +1,25 @@
+# =============================================================================
+# TICKET-ADV078/079 — test profile: Testcontainers auto-wires the DataSource
+# via @ServiceConnection. Kafka is disabled.
+# =============================================================================
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    listener:
+      missing-topics-fatal: false
+    consumer:
+      auto-startup: false
+
+  liquibase:
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+    enabled: true
+
+logging:
+  level:
+    com.dbtraining.reconx: DEBUG
