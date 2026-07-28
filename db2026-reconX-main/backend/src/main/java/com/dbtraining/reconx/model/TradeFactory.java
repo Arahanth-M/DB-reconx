@@ -34,8 +34,15 @@ public final class TradeFactory {
      *   3. The switch must be exhaustive — every TradeType.AssetClass case handled.
      */
     public static TradeType create(String assetClass, Map<String, Object> p) {
-        throw new UnsupportedOperationException("TICKET-ADV023");
+        TradeType.AssetClass ac = TradeType.AssetClass.valueOf(assetClass.toUpperCase());
+        return switch (ac) {
+            case EQUITY     -> equity(p);
+            case FX         -> fx(p);
+            case BOND       -> bond(p);
+            case DERIVATIVE -> derivative(p);
+        };
     }
+
 
     /**
      * TODO(TICKET-ADV023):
@@ -43,7 +50,16 @@ public final class TradeFactory {
      *   quantity, price, currency, side, tradeDate, counterpartyId.
      */
     private static EquityTrade equity(Map<String, Object> p) {
-        throw new UnsupportedOperationException("TICKET-ADV023");
+        return EquityTrade.builder()
+                .tradeRef(TradeRef.of((String) p.get("tradeRef")))
+                .instrumentSymbol((String) p.get("symbol"))
+                .quantity(new BigDecimal(p.get("quantity").toString()))
+                .price(new BigDecimal(p.get("price").toString()))
+                .currency((String) p.get("currency"))
+                .side(Side.valueOf((String) p.get("side")))
+                .tradeDate(LocalDate.parse((String) p.get("tradeDate")))
+                .counterpartyId(((Number) p.get("counterpartyId")).longValue())
+                .build();
     }
 
     /**
@@ -52,7 +68,16 @@ public final class TradeFactory {
      *   notionalCcy1, fxRate, side, tradeDate, counterpartyId.
      */
     private static FXTrade fx(Map<String, Object> p) {
-        throw new UnsupportedOperationException("TICKET-ADV023");
+        return FXTrade.builder()
+                .tradeRef(TradeRef.of((String) p.get("tradeRef")))
+                .ccy1((String) p.get("ccy1"))
+                .ccy2((String) p.get("ccy2"))
+                .notionalCcy1(new BigDecimal(p.get("notionalCcy1").toString()))
+                .fxRate(new BigDecimal(p.get("fxRate").toString()))
+                .side(Side.valueOf((String) p.get("side")))
+                .tradeDate(LocalDate.parse((String) p.get("tradeDate")))
+                .counterpartyId(((Number) p.get("counterpartyId")).longValue())
+                .build();
     }
 
     /**
@@ -61,17 +86,37 @@ public final class TradeFactory {
      *   faceValue, couponRate, maturityDate, currency, side, tradeDate,
      *   counterpartyId.
      */
-    private static BondTrade bond(Map<String, Object> p) {
-        throw new UnsupportedOperationException("TICKET-ADV023");
+  private static BondTrade bond(Map<String, Object> p) {
+        return BondTrade.builder()
+                .tradeRef(TradeRef.of((String) p.get("tradeRef")))
+                .isin((String) p.get("isin"))
+                .faceValue(new BigDecimal(p.get("faceValue").toString()))
+                .couponRate(new BigDecimal(p.get("couponRate").toString()))
+                .maturityDate(LocalDate.parse((String) p.get("maturityDate")))
+                .currency((String) p.get("currency"))
+                .side(Side.valueOf((String) p.get("side")))
+                .tradeDate(LocalDate.parse((String) p.get("tradeDate")))
+                .counterpartyId(((Number) p.get("counterpartyId")).longValue())
+                .build();
     }
-
     /**
      * TODO(TICKET-ADV023):
      *   Build a DerivativeTrade from the map. Expected keys: tradeRef,
      *   underlying, strike, quantity, expiry, optionType, currency, side,
      *   tradeDate, counterpartyId.
      */
-    private static DerivativeTrade derivative(Map<String, Object> p) {
-        throw new UnsupportedOperationException("TICKET-ADV023");
+   private static DerivativeTrade derivative(Map<String, Object> p) {
+        return DerivativeTrade.builder()
+                .tradeRef(TradeRef.of((String) p.get("tradeRef")))
+                .underlying((String) p.get("underlying"))
+                .strike(new BigDecimal(p.get("strike").toString()))
+                .quantity(new BigDecimal(p.get("quantity").toString()))
+                .expiry(LocalDate.parse((String) p.get("expiry")))
+                .optionType(DerivativeTrade.OptionType.valueOf((String) p.get("optionType")))
+                .currency((String) p.get("currency"))
+                .side(Side.valueOf((String) p.get("side")))
+                .tradeDate(LocalDate.parse((String) p.get("tradeDate")))
+                .counterpartyId(((Number) p.get("counterpartyId")).longValue())
+                .build();
     }
 }
