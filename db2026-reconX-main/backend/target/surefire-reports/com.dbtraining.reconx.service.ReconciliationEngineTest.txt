@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.dbtraining.reconx.service.ReconciliationEngineTest
 -------------------------------------------------------------------------------
-Tests run: 7, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 0.082 s <<< FAILURE! -- in com.dbtraining.reconx.service.ReconciliationEngineTest
-com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_exactMatch_returnsMatched -- Time elapsed: 0.010 s <<< ERROR!
+Tests run: 7, Failures: 0, Errors: 5, Skipped: 0, Time elapsed: 0.021 s <<< FAILURE! -- in com.dbtraining.reconx.service.ReconciliationEngineTest
+com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_exactMatch_returnsMatched -- Time elapsed: 0.002 s <<< ERROR!
 java.lang.UnsupportedOperationException: TICKET-ADV018
 	at com.dbtraining.reconx.service.ReconciliationEngine.priceQty(ReconciliationEngine.java:132)
 	at com.dbtraining.reconx.service.ReconciliationEngine.matchOne(ReconciliationEngine.java:112)
@@ -28,7 +28,7 @@ java.lang.UnsupportedOperationException: TICKET-ADV018
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 
-com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_priceTolerance_withinThreshold(String)[1] -- Time elapsed: 0 s <<< ERROR!
+com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_priceTolerance_withinThreshold(String)[1] -- Time elapsed: 0.002 s <<< ERROR!
 java.lang.UnsupportedOperationException: TICKET-ADV018
 	at com.dbtraining.reconx.service.ReconciliationEngine.priceQty(ReconciliationEngine.java:132)
 	at com.dbtraining.reconx.service.ReconciliationEngine.matchOne(ReconciliationEngine.java:112)
@@ -86,7 +86,7 @@ java.lang.UnsupportedOperationException: TICKET-ADV018
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 
-com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_priceTolerance_withinThreshold(String)[2] -- Time elapsed: 0.003 s <<< ERROR!
+com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_priceTolerance_withinThreshold(String)[2] -- Time elapsed: 0.001 s <<< ERROR!
 java.lang.UnsupportedOperationException: TICKET-ADV018
 	at com.dbtraining.reconx.service.ReconciliationEngine.priceQty(ReconciliationEngine.java:132)
 	at com.dbtraining.reconx.service.ReconciliationEngine.matchOne(ReconciliationEngine.java:112)
@@ -144,7 +144,7 @@ java.lang.UnsupportedOperationException: TICKET-ADV018
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 
-com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_priceTolerance_withinThreshold(String)[3] -- Time elapsed: 0.004 s <<< ERROR!
+com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_priceTolerance_withinThreshold(String)[3] -- Time elapsed: 0 s <<< ERROR!
 java.lang.UnsupportedOperationException: TICKET-ADV018
 	at com.dbtraining.reconx.service.ReconciliationEngine.priceQty(ReconciliationEngine.java:132)
 	at com.dbtraining.reconx.service.ReconciliationEngine.matchOne(ReconciliationEngine.java:112)
@@ -202,7 +202,7 @@ java.lang.UnsupportedOperationException: TICKET-ADV018
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
 
-com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_allMismatched_summaryShowsZeroMatched -- Time elapsed: 0.002 s <<< ERROR!
+com.dbtraining.reconx.service.ReconciliationEngineTest.testReconcile_allMismatched_summaryShowsZeroMatched -- Time elapsed: 0 s <<< ERROR!
 java.lang.IllegalArgumentException: Invalid tradeRef format 'EQU-MM-1' — expected AAA-YYYYMMDD-NNNN
 	at com.dbtraining.reconx.model.TradeRef.<init>(TradeRef.java:28)
 	at com.dbtraining.reconx.model.TradeRef.of(TradeRef.java:33)
