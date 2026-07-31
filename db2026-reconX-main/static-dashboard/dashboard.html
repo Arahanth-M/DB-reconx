@@ -15,7 +15,7 @@ TICKET-ADV100 — ARIA roles + aria-live for the trade feed
 </head>
 <body>
   <header class="layout__header" role="banner">
-    <h1 class="layout__title">ReconX</h1>
+    <h1 class="layout__title">ReconX Dashboard</h1>
     <nav class="layout__nav" aria-label="Main navigation">
       <a href="dashboard.html" aria-current="page">Dashboard</a>
       <a href="trades.html">Trades</a>
@@ -25,7 +25,7 @@ TICKET-ADV100 — ARIA roles + aria-live for the trade feed
   </header>
 
   <aside class="layout__sidebar" role="complementary">
-    <h2>Quick filters</h2>
+    <h2>📂 Quick Filters</h2>
     <ul>
       <li><a href="#">All trades</a></li>
       <li><a href="#">Open breaks</a></li>
@@ -37,22 +37,22 @@ TICKET-ADV100 — ARIA roles + aria-live for the trade feed
     <section aria-labelledby="kpi">
       <h2 id="kpi">Today at a glance</h2>
       <div class="stat-grid">
-        <article class="stat-card"><h3>Trades</h3><p>120</p></article>
-        <article class="stat-card"><h3>Matched</h3><p>105</p></article>
-        <article class="stat-card stat-card--warn"><h3>Open breaks</h3><p>15</p></article>
-        <article class="stat-card"><h3>Notional</h3><p>$24.3M</p></article>
+        <article class="stat-card"><h3>📈 Trades</h3><p>120</p></article>
+        <article class="stat-card"><h3>✅ Matched</h3><p>105</p></article>
+        <article class="stat-card stat-card--warn"><h3>⚠️ Open Breaks</h3><p>15</p></article>
+        <article class="stat-card"><h3>💰 Notional</h3><p>$24.3M</p></article>
       </div>
     </section>
 
     <section aria-labelledby="feed">
-      <h2 id="feed">Live trade feed</h2>
+      <h2 id="feed">📡 Live Trade Feed</h2>
       <!-- TICKET-ADV100 aria-live so screen readers announce new trades -->
       <div id="trade-feed" role="status" aria-live="polite" aria-atomic="false"></div>
     </section>
   </main>
 
   <footer class="layout__footer" role="contentinfo">
-    <small>ReconX TDI 2026 · static dashboard (Day 7)</small>
+    <small>© 2026 ReconX • Trade Monitoring Dashboard</small>
   </footer>
 
   <script src="js/theme.js"></script>
