@@ -20,16 +20,7 @@ import org.springframework.stereotype.Component;
  *          partitioned by tradeRef.
  * ============================================================================
  *
- *  TODO(TICKET-ADV129):
- *    public void publish(TradeEvent event) {
- *        log.debug("Publishing TradeEvent eventId={} ref={} type={}",
- *                  event.eventId(), event.tradeRef(), event.eventType());
- *        template.send(TOPIC, event.tradeRef(), event);
- *    }
- *
  *  GOTCHA: NEVER let a Kafka publish failure roll back the DB transaction.
- *          Publish AFTER commit (use TransactionSynchronizationManager or
- *          @TransactionalEventListener), or accept eventual consistency.
  * ============================================================================
  */
 @Component
@@ -49,7 +40,17 @@ public class TradeEventProducer {
                 event.eventId(),
                 event.tradeRef(),
                 event.eventType());
-
-        template.send(TOPIC, event.tradeRef(), event);
+        try {
+            // Async send — failures must not fail the HTTP create/update path.
+            template.send(TOPIC, event.tradeRef(), event)
+                    .whenComplete((result, ex) -> {
+                        if (ex != null) {
+                            log.warn("Kafka publish failed for ref={}: {}", event.tradeRef(), ex.toString());
+                        }
+                    });
+        } catch (Exception ex) {
+            // Broker down / metadata timeout — trade is already saved; log and continue.
+            log.warn("Kafka publish skipped for ref={}: {}", event.tradeRef(), ex.toString());
+        }
     }
 }

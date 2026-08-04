@@ -6,6 +6,7 @@ import com.dbtraining.reconx.dto.TradeRequest;
 import com.dbtraining.reconx.dto.TradeResponse;
 import com.dbtraining.reconx.repository.entity.Trade;
 import com.dbtraining.reconx.service.TradeService;
+import com.dbtraining.reconx.sse.TradeStreamHub;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,13 +15,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.net.URI;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -40,10 +42,18 @@ public class TradeController {
 
     private final TradeService service;
     private final TradeMapper mapper;
+    private final TradeStreamHub streamHub;
 
-    public TradeController(TradeService service, TradeMapper mapper) {
+    public TradeController(TradeService service, TradeMapper mapper, TradeStreamHub streamHub) {
         this.service = service;
         this.mapper = mapper;
+        this.streamHub = streamHub;
+    }
+
+    @GetMapping(path = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    @Operation(summary = "Live trade feed (Server-Sent Events)")
+    public SseEmitter stream() {
+        return streamHub.subscribe();
     }
 
     @GetMapping
@@ -64,8 +74,10 @@ public class TradeController {
                                                 @AuthenticationPrincipal Object principal) {
         String actor = principal != null ? principal.toString() : "system";
         Trade saved = service.create(req, actor);
+        TradeResponse body = mapper.toResponse(saved);
+        streamHub.publish(body);
         URI location = URI.create("/api/v1/trades/" + saved.getId());
-        return ResponseEntity.created(location).body(mapper.toResponse(saved));
+        return ResponseEntity.created(location).body(body);
     }
 
     @PutMapping("/{id}")

@@ -45,6 +45,10 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.add.type.headers: false
+        # Fail fast when broker is down so HTTP create isn't blocked ~60s
+        max.block.ms: 3000
+        request.timeout.ms: 3000
+        delivery.timeout.ms: 5000
     consumer:
       group-id: reconx-service
       auto-offset-reset: earliest

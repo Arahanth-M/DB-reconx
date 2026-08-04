@@ -104,6 +104,7 @@ public class TradeService {
         t.setPrice(req.price());
         t.setTradeDate(req.tradeDate());
         Trade saved = tradeRepo.save(t);
+        initializeAssociations(saved);
 
         events.publish(new TradeEvent(UUID.randomUUID(), saved.getTradeRef(),
                 TradeEvent.EventType.TRADE_UPDATED, Instant.now(), actor,
@@ -119,11 +120,23 @@ public class TradeService {
         String before = "status=" + t.getStatus();
         t.setStatus(status);
         Trade saved = tradeRepo.save(t);
+        // open-in-view=false: touch lazy associations before TX ends so TradeMapper can read them.
+        initializeAssociations(saved);
 
         events.publish(new TradeEvent(UUID.randomUUID(), saved.getTradeRef(),
                 TradeEvent.EventType.TRADE_UPDATED, Instant.now(), actor,
                 before, "status=" + status));
         return saved;
+    }
+
+    /** Force-load LAZY instrument/counterparty while the persistence context is open. */
+    private static void initializeAssociations(Trade t) {
+        if (t.getInstrument() != null) {
+            t.getInstrument().getSymbol();
+        }
+        if (t.getCounterparty() != null) {
+            t.getCounterparty().getName();
+        }
     }
 
     public void softDelete(Long id, String actor) {
@@ -145,8 +158,9 @@ public class TradeService {
         //   TradeSpecifications (hasStatus, tradeDateBetween, hasCounterparty)
         //   via Specification.where(...).and(...) and call
         //   tradeRepo.findAll(spec, pageable). Until JPA is in place, throw.
-         Specification<Trade> spec = Specification
-                .where(tradeDateBetween(from, to))
+        Specification<Trade> spec = Specification
+                .where(withAssociations())
+                .and(tradeDateBetween(from, to))
                 .and(hasStatus(status))
                 .and(hasCounterparty(counterpartyId));
         return tradeRepo.findAll(spec, pageable);

@@ -42,9 +42,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain)
             throws ServletException, IOException {
-        String header = req.getHeader("Authorization");
-        if (header != null && header.startsWith("Bearer ")) {
-            String token = header.substring(7);
+        String token = resolveToken(req);
+        if (token != null) {
             try {
                 Claims claims = provider.parse(token);
                 String email = claims.getSubject();
@@ -58,5 +57,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         }
         chain.doFilter(req, res);
+    }
+
+    /** Bearer header first; EventSource cannot set headers, so also accept ?access_token=. */
+    private static String resolveToken(HttpServletRequest req) {
+        String header = req.getHeader("Authorization");
+        if (header != null && header.startsWith("Bearer ")) {
+            return header.substring(7);
+        }
+        String queryToken = req.getParameter("access_token");
+        return (queryToken != null && !queryToken.isBlank()) ? queryToken : null;
     }
 }

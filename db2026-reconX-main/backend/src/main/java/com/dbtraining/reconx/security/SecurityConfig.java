@@ -33,12 +33,13 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
                         "/auth/login",
+                        "/error",
                         "/actuator/health/**", "/actuator/info",
                         "/actuator/prometheus",
                         "/swagger-ui.html", "/swagger-ui/**",
                         "/v3/api-docs/**",
                         "/h2/**").permitAll()
-                .requestMatchers(HttpMethod.GET,    "/v1/trades/**").hasAnyRole("VIEWER", "TRADER", "RECON_ANALYST", "ADMIN")
+                .requestMatchers(HttpMethod.GET,    "/v1/trades", "/v1/trades/**").hasAnyRole("VIEWER", "TRADER", "RECON_ANALYST", "ADMIN")
                 .requestMatchers(HttpMethod.POST,   "/v1/trades").hasAnyRole("TRADER", "ADMIN")
                 .requestMatchers(HttpMethod.PUT,    "/v1/trades/**").hasAnyRole("TRADER", "ADMIN")
                 .requestMatchers(HttpMethod.PATCH,  "/v1/trades/**").hasAnyRole("TRADER", "ADMIN")

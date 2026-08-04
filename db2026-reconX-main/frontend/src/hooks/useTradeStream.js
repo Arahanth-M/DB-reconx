@@ -1,40 +1,33 @@
-// TICKET-ADV116 — useTradeStream() — SSE subscription returning live trades.
+// useTradeStream() — SSE subscription returning live trades.
 import { useEffect, useState } from 'react';
 
 const MAX_BUFFER = 200;
+
+function streamUrl(base = '/api/v1/trades/stream') {
+  const token = typeof sessionStorage !== 'undefined'
+    ? sessionStorage.getItem('reconx-token')
+    : null;
+  if (!token) return base;
+  const sep = base.includes('?') ? '&' : '?';
+  return `${base}${sep}access_token=${encodeURIComponent(token)}`;
+}
 
 export function useTradeStream(url = '/api/v1/trades/stream') {
   const [trades, setTrades] = useState([]);
   const [isConnected, setConnected] = useState(false);
 
   useEffect(() => {
-    const eventSource = new EventSource(url);
-
-    eventSource.onopen = () => {
-      setConnected(true);
-    };
-
-    eventSource.onmessage = (event) => {
+    const sse = new EventSource(streamUrl(url));
+    sse.onopen  = () => setConnected(true);
+    sse.onerror = () => setConnected(false);
+    sse.onmessage = (e) => {
       try {
-        const trade = JSON.parse(event.data);
-
+        const trade = JSON.parse(e.data);
         setTrades((prev) => [trade, ...prev].slice(0, MAX_BUFFER));
-      } catch {
-        // Ignore malformed payloads
-      }
+      } catch { /* ignore malformed payload */ }
     };
-
-    eventSource.onerror = () => {
-      setConnected(false);
-    };
-
-    return () => {
-      eventSource.close();
-    };
+    return () => sse.close();
   }, [url]);
 
-  return {
-    trades,
-    isConnected,
-  };
+  return { trades, isConnected };
 }
