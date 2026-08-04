@@ -1,17 +1,25 @@
 // TICKET-ADV122 — Lazy + Suspense for route-based code splitting
 import React, { Suspense, lazy } from 'react';
-import { Routes, Route, Link, Navigate } from 'react-router-dom';
+import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import { withErrorBoundary } from '@components/withErrorBoundary.jsx';
+import { useTheme } from '@context/ThemeContext.jsx';
+import { useAuth } from '@context/AuthContext.jsx';
 
-// TODO(TICKET-ADV122): wrap each page import in React.lazy() so Vite emits a
-// separate chunk per route. The <Suspense> fallback below shows while the
-// chunk downloads.
 const Dashboard = lazy(() => import('@pages/Dashboard.jsx'));
 const Trades    = lazy(() => import('@pages/Trades.jsx'));
 const AddTrade  = lazy(() => import('@pages/AddTrade.jsx'));
 const Login     = lazy(() => import('@pages/Login.jsx'));
 
 function App() {
+  const { theme, toggle } = useTheme();
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    logout();
+    navigate('/login', { replace: true });
+  }
+
   return (
     <div className="layout">
       <header className="layout__header">
@@ -20,6 +28,23 @@ function App() {
           <Link to="/">Dashboard</Link>
           <Link to="/trades">Trades</Link>
           <Link to="/trades/new">Add trade</Link>
+          <button
+            type="button"
+            className="header-btn"
+            onClick={toggle}
+            aria-label="Toggle color theme"
+          >
+            {theme === 'light' ? 'Dark' : 'Light'}
+          </button>
+          {user && (
+            <button
+              type="button"
+              className="header-btn"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          )}
         </nav>
       </header>
       <main className="layout__main">

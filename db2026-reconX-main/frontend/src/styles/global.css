@@ -40,9 +40,19 @@ body {
 /* TICKET-ADV098 — page shell layout */
 .layout { display: grid; grid-template-rows: 64px 1fr; min-height: 100vh; }
 .layout__header { display: flex; align-items: center; gap: var(--space-4); padding: 0 var(--space-4); background: var(--color-primary); color: #fff; }
-.layout__nav    { display: flex; gap: var(--space-3); margin-left: auto; }
+.layout__nav    { display: flex; align-items: center; gap: var(--space-3); margin-left: auto; }
 .layout__nav a  { color: #fff; text-decoration: none; }
 .layout__nav a:hover { text-decoration: underline; }
+.header-btn {
+  padding: 6px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: transparent;
+  color: #fff;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 14px;
+}
+.header-btn:hover { background: rgba(255, 255, 255, 0.12); }
 .layout__main   { padding: var(--space-4); }
 
 .loader { padding: var(--space-4); color: var(--color-text); }
